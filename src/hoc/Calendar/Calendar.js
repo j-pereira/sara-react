@@ -8,27 +8,32 @@ class CalendarDatePicker extends Component {
     constructor (props) {
         super(props)
         this.state = {
-        startDate: moment()
+            date: props.date,
+            minDate: props.minDate
         };
         this.handleChange = this.handleChange.bind(this);
     }
  
-    handleChange(date) {
+    handleChange(newDate) {
         this.setState({
-        startDate: date
+            date: newDate
         });
     }
  
     render() {
-        return (
+        return ( 
             <DatePicker
-                selected={this.state.startDate}
+                selected={this.state.date}
                 onChange={this.handleChange}
-                peekNextMonth
                 showMonthDropdown
                 showYearDropdown
                 dropdownMode="select"
+                minDate={this.state.minDate}
+                maxDate={moment()}
+                showDisabledMonthNavigation
+                todayButton={"Today"}
             />
+            
         );
     }
 }
