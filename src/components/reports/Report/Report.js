@@ -1,21 +1,21 @@
 import React, { Component } from 'react'
 import Collapse from '../../../hoc/Collapse/Collapse';
 import ReportAttributes from '../ReportAttributes/ReportAttributes';
-import ARTable from '../ARTable/ARTable';
+import Table from '../AssociationRules/Table/Table';
 
 class Report extends Component {
 
     constructor (props) {
         super(props)
         this.state = {
-            resultTable: ''
+            resultTable: false
         }
     }
 
 
     renderRules = () => {
         this.setState({
-            resultTable: <ARTable />
+            resultTable: true
         })
     }
     
@@ -27,7 +27,7 @@ class Report extends Component {
                 <Collapse>
                     <ReportAttributes generateRules={this.renderRules} />
                 </Collapse>
-                {this.state.resultTable}
+                <Table renderTable={this.state.resultTable}/>
             </div>
 
         )
