@@ -14,19 +14,19 @@ class ReportAttributes extends Component {
                                 <label className="container" >Attributes</label>
                                 <div className="form-group form-check pt-2">
                                     <input id="area" type="checkbox" className="form-check-input"/>
-                                    <label className="form-check-label " for="area">Area</label>
+                                    <label className="form-check-label" for="area">Area</label>
                                 </div>
                                 <div className="form-group form-check">
                                     <input id="mag" type="checkbox" className="form-check-input"/>
-                                    <label className="form-check-label " for="mag">Magnetic classifiction</label>
+                                    <label className="form-check-label" for="mag">Magnetic classifiction</label>
                                 </div>
                                 <div className="form-group form-check">
                                     <input id="xray" type="checkbox" className="form-check-input"/>
-                                    <label className="form-check-label " for="xray">X-ray flux</label>
+                                    <label className="form-check-label" for="xray">X-ray flux</label>
                                 </div>
                                 <div className="form-group form-check">
                                     <input id="radio" type="checkbox" className="form-check-input"/>
-                                    <label className="form-check-label " for="radio">Radio flux</label>
+                                    <label className="form-check-label" for="radio">Radio flux</label>
                                 </div>  
                             </div>
                         </div>
@@ -56,8 +56,8 @@ class ReportAttributes extends Component {
                                 <div className="row pt-2">
                                     <div className="col col-lg-10 pr-0">
                                         <div className="form-group form-check pt-2">
-                                            <input id="area" type="checkbox" className="form-check-input"/>
-                                            <label className="form-check-label " for="area">Use hole datase</label>
+                                            <input id="dataset" type="checkbox" className="form-check-input"/>
+                                            <label className="form-check-label " for="dataset">Use hole datase</label>
                                         </div>
                                     </div>
                                 </div>
@@ -94,7 +94,7 @@ class ReportAttributes extends Component {
                     <div className="container pt-3">
                         <button type="submit" 
                             className="btn btn-primary float-right"
-                            onClick={this.props.generateRules}>
+                            onClick={(event) => {this.props.generateRules(event)}}>
                             Create
                         </button>
                     </div> 
