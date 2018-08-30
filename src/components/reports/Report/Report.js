@@ -26,7 +26,7 @@ class Report extends Component {
                         dataset: response.data 
                     }
                 );
-                console.log(response.data);
+                console.log(this.state.dataset);
             })
             .catch( error => {
                 console.error(error);
@@ -41,7 +41,7 @@ class Report extends Component {
                 <Collapse>
                     <ReportAttributes generateRules={this.renderRules} />
                 </Collapse>
-                <ARTable hasResults={this.state.resultTable} data={this.setState.dataset} />
+                <ARTable hasResults={this.state.resultTable} data={this.state.dataset} />
             </div>
 
         )

@@ -10,9 +10,9 @@ class Collapse extends Component {
     }
 
     changeButtonText = () => {
-        if (this.state.buttonText == 'Hide') {
+        if (this.state.buttonText === 'Hide') {
             this.setState({ buttonText: 'Show' })
-        } else if (this.state.buttonText == 'Show') {
+        } else if (this.state.buttonText === 'Show') {
             this.setState({ buttonText: 'Hide' })
         }
     } 
