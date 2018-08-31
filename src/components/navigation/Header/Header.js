@@ -12,8 +12,11 @@ const header = (props) => {
                 <span className="navbar-toggler-icon"></span>
             </button>
             <div className="collapse navbar-collapse ml-3" id="navbarNavAltMarkup">
-                <div className="navbar-nav mr-10">
+                <div className="navbar-nav pl-2 pr-2">
                     <Link className="nav-item nav-link" to="/reports">Reports</Link>
+                </div>
+                <div className="navbar-nav pl-2 pr-2">
+                    <Link className="nav-item nav-link" to="/about">About</Link>
                 </div>
             </div>
 

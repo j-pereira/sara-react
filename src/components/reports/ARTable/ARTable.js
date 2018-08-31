@@ -27,9 +27,9 @@ class ARTable extends Component {
             })
 
             table = <div className="container border">
-                        <div className="container mt-3">
+                        <div className="container mt-3 mb-3">
                             <div className="row bg-light font-weight-bold">
-                                <div className="col">Year</div>
+                                <div className="col align-middle">Year</div>
                                 <div className="col">Month</div>
                                 <div className="col">Day</div>
                                 <div className="col">Region</div>
@@ -56,7 +56,7 @@ class ARTable extends Component {
         }
 
         return ( 
-            <div>
+            <div className="mb-3">
                 {render}
             </div>
         )
