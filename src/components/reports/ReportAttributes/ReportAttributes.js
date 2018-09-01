@@ -1,13 +1,28 @@
 import React, { Component } from 'react';
 import Calendar from '../../../hoc/Calendar/Calendar'
 import moment from 'moment';
+import Loading from '../../../hoc/Loading/Loading'
 
 class ReportAttributes extends Component {
+
+    constructor (props) {
+        super(props)
+        this.state = {
+            loading: false
+        }
+    }
 
     render () {
         let datasetStatus;
         let statusClass;
         let update;
+        let loading;
+
+        if (this.state.loading) {
+            loading = <Loading/>;
+        } else {
+            loading = ''
+        }
 
         if (this.props.datasetLastDate.updated) {
             datasetStatus = 'Updated';
@@ -21,15 +36,19 @@ class ReportAttributes extends Component {
                     <div className="row mt-4">
                         <div className="col col-sm-12">
                             <label>Do you want to update?</label>
-                        <button 
-                            type="submit" 
-                            className="btn btn-link"
-                            onClick={(event) => {this.props.updateDataset(event)}}
-                        >
-                            Yes
-                        </button>
+                            <button 
+                                type="submit" 
+                                className="btn btn-link"
+                                onClick={(event) => {
+                                    this.setState({ loading: true })
+                                    this.props.updateDataset(event)
+                                }}
+                            >
+                                Yes
+                            </button>
                         </div>
                     </div>
+                    {loading}
                 </div>
         }
 

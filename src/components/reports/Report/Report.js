@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import Collapse from '../../../hoc/Collapse/Collapse';
 import ReportAttributes from '../ReportAttributes/ReportAttributes';
 import ARTable from '../ARTable/ARTable';
+import BlockUI from '../../../hoc/BlockUI/BlockUI';
 import axios from 'axios';
 
 class Report extends Component {
@@ -11,7 +12,8 @@ class Report extends Component {
         this.state = {
             resultTable: false,
             dataset: [],
-            lastdate: {}
+            lastdate: {},
+            loading: ''
         }
     }
 
@@ -29,6 +31,7 @@ class Report extends Component {
 
     updateDatasetFile = (event) => {
         event.preventDefault();
+        this.setState({ loading: 'fademe' });
         axios.get('dataset/update')
             .then( response => {
                 this.setState({ lastdate: response.data });
@@ -37,6 +40,7 @@ class Report extends Component {
             .catch( error => {
                 console.error(error);
             });
+        this.setState({ loading: '' });
 
     }
 
@@ -61,6 +65,7 @@ class Report extends Component {
 
         return (
             <div>
+                <BlockUI fade={this.state.loading}/>
                 <Collapse>
                     <ReportAttributes updateDataset={this.updateDatasetFile} datasetLastDate={this.state.lastdate} generateRules={this.renderRules} />
                 </Collapse>
