@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import ARRow from '../ARRow/ARRow';
+import '../ARTable/ARTable.css'
 
 class ARTable extends Component {
     
@@ -10,41 +11,61 @@ class ARTable extends Component {
 
         if (this.props.hasResults) {
             let rows = this.props.data.map(row => {
-                bgColor = bgColor === 'bg-light' ? 'bg-white' : 'bg-light';
+                bgColor = bgColor === 'bg-light' ? 'bg-muted' : 'bg-light';
+            
                 return (
-                    <ARRow
+                    <ARRow 
                         bg={bgColor}
-                        year={row.year}    
-                        month={row.month}
-                        day={row.day}
-                        region={row.region}
-                        area={row.area}
-                        magClassification={row.magClassification}
-                        xray={row.xray}
-                        radio={row.radio}
+                        attributes={row}
+                        renderAttributes = {this.props.chosenAttributes}
                     />
+                    
                 )
             })
+
+            let area = '';
+            let sNumber = '';
+            let magClassification = '';
+            let xray = '';
+            let radio = '';
+
+            
+            if (this.props.chosenAttributes.area) {
+                area = <div className="col">Area</div>
+            }
+            if ((this.props.chosenAttributes.dataset === 'original' && this.props.chosenAttributes.sNumber)) {
+                sNumber = <div className="col">Sunspot Number</div>
+            }
+            if (this.props.chosenAttributes.magClassification) {
+                magClassification = <div className="col">Sunspot Magnetic Classification</div>
+            }
+            if (this.props.chosenAttributes.xray) {
+                xray = <div className="col">X-Ray Flares</div>
+            }
+            if (this.props.chosenAttributes.radio) {
+                radio = <div className="col">Radio Flux</div>
+            }
 
             table = <div className="container border">
                         <div className="container mt-3 mb-3">
                             <div className="row bg-light font-weight-bold">
-                                <div className="col align-middle">Year</div>
-                                <div className="col">Month</div>
+                                <div className="col">Year</div>
+                                <div className="col"><span>Month</span></div>
                                 <div className="col">Day</div>
                                 <div className="col">Region</div>
-                                <div className="col">Area</div>
-                                <div className="col">Sunspot Magnetic Classification</div>
-                                <div className="col">X-Ray Flares</div>
-                                <div className="col">Radio Flux</div>
+                                {area}
+                                {sNumber}
+                                {magClassification}
+                                {xray}
+                                {radio}
                             </div>
                             {rows} 
                        </div>
                     </div>
             render = <div className="mt-3 mb-">
-                        <div class="d-flex flex-row-reverse">
-                            <div class="p-2">Filter</div>
-                            <div class="p-2">Choose</div>
+                        <div className="d-flex flex-row-reverse">
+                            <div className="p-2">Filter</div>
+                            <div className="p-2">Choose</div>
                         </div>
                         <div>
                             {table}

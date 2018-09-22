@@ -13,6 +13,7 @@ class Report extends Component {
             resultTable: false,
             dataset: [],
             lastdate: {},
+            attributes: {},
             loading: ''
         }
     }
@@ -45,13 +46,18 @@ class Report extends Component {
     }
 
 
-    renderRules = (event) => {
-        event.preventDefault();
-        axios.get('dataset')
+    renderDataset = (attributes) => {
+        let endpoint = attributes.dataset;
+        if (attributes.dataset === 'classified') {
+            attributes.sNumber = 'none'
+        }
+        console.log(attributes);
+        axios.post('dataset/' + endpoint, attributes)
             .then( response => {
                 this.setState({ 
                     resultTable: true, 
-                    dataset: response.data 
+                    dataset: response.data,
+                    attr: attributes
                 });
                 console.log(this.state.dataset);
             })
@@ -67,9 +73,9 @@ class Report extends Component {
             <div>
                 <BlockUI fade={this.state.loading}/>
                 <Collapse>
-                    <ReportAttributes updateDataset={this.updateDatasetFile} datasetLastDate={this.state.lastdate} generateRules={this.renderRules} />
+                    <ReportAttributes updateDataset={this.updateDatasetFile} datasetLastDate={this.state.lastdate} getDataset={this.renderDataset} />
                 </Collapse>
-                <ARTable hasResults={this.state.resultTable} data={this.state.dataset} />
+                <ARTable hasResults={this.state.resultTable} data={this.state.dataset} chosenAttributes={this.state.attr}/>
             </div>
 
         )
