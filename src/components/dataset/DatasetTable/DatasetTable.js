@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import ARRow from '../ARRow/ARRow';
-import '../ARTable/ARTable.css'
+import DatasetRow from '../DatasetRow/DatasetRow';
+import '../DatasetTable/DatasetTable.css'
 
-class ARTable extends Component {
+class DatasetTable extends Component {
     
     render () {
         let render;
@@ -14,7 +14,7 @@ class ARTable extends Component {
                 bgColor = bgColor === 'bg-light' ? 'bg-muted' : 'bg-light';
             
                 return (
-                    <ARRow 
+                    <DatasetRow 
                         bg={bgColor}
                         attributes={row}
                         renderAttributes = {this.props.chosenAttributes}
@@ -50,7 +50,7 @@ class ARTable extends Component {
                         <div className="container mt-3 mb-3">
                             <div className="row bg-light font-weight-bold">
                                 <div className="col">Year</div>
-                                <div className="col"><span>Month</span></div>
+                                <div className="col">Month</div>
                                 <div className="col">Day</div>
                                 <div className="col">Region</div>
                                 {area}
@@ -62,11 +62,7 @@ class ARTable extends Component {
                             {rows} 
                        </div>
                     </div>
-            render = <div className="mt-3 mb-">
-                        <div className="d-flex flex-row-reverse">
-                            <div className="p-2">Filter</div>
-                            <div className="p-2">Choose</div>
-                        </div>
+            render = <div className="mt-3">
                         <div>
                             {table}
                         </div>
@@ -85,4 +81,4 @@ class ARTable extends Component {
     
 }
 
-export default ARTable;
+export default DatasetTable;

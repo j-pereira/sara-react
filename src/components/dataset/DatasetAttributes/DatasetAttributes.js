@@ -4,7 +4,7 @@ import moment from 'moment';
 import Loading from '../../../hoc/Loading/Loading'
 
 
-class ReportAttributes extends Component {
+class DatasetAttributes extends Component {
 
     constructor (props) {
         super(props)
@@ -15,9 +15,9 @@ class ReportAttributes extends Component {
                 startYear: "1997",
                 startMonth: "01",
                 startDay: "01",
-                endYear: moment().format('YYYY'),
-                endMonth: moment().format('MM'),
-                endDay: moment().format('DD'),
+                endYear: "",
+                endMonth: "",
+                endDay: "",
                 area: true,
                 sNumber: true,
                 magClassification: true,
@@ -50,9 +50,10 @@ class ReportAttributes extends Component {
 
     changeDateHandler = (attributeName, value) => {
         let param = this.state.datasetParam;
-        param[attributeName + "Year"] = value.format('YYYY');
-        param[attributeName + "Month"] = value.format('MM');
-        param[attributeName + "Day"] = value.format('DD');
+        let date = value.split("-");
+        param[attributeName + "Year"] = date[0];
+        param[attributeName + "Month"] = date[1];
+        param[attributeName + "Day"] = date[2];
         this.setState({ datasetParam: param });
         console.log(this.state.datasetParam);
     }
@@ -70,64 +71,17 @@ class ReportAttributes extends Component {
         return this.state.sNDisabled
     }
 
-    /*componentWillUpdate(){
-        if(this.props.datasetLastDate.data != undefined) {
-            this.setState({
-                date: moment(this.props.datasetLastDate.data + " 00:00:00")
-            });
-        }
-    }*/
-
     render () {
-        let datasetStatus;
-        let statusClass;
-        let update;
-        let loading;
-
-        if (this.state.loading) {
-            loading = <Loading/>;
-        } else {
-            loading = ''
-        }
-
-        if (this.props.datasetLastDate.updated) {
-            datasetStatus = 'Updated';
-            statusClass = 'text-success border-success';
-            update = '';
-        } else {
-            datasetStatus = 'Outdated';
-            statusClass = 'text-warning border-warning';
-            update = 
-                <div className="d-inline float-right">  
-                    <button 
-                        type="submit" 
-                        className="btn btn-link btn-sm"
-                        onClick={(event) => {
-                            this.setState({ loading: true })
-                            this.props.updateDataset(event)
-                        }} >
-                        Update  
-                    </button>
-                    {loading}
-                </div>
-        }
-
+        
         return (
             <form className="container"> 
-                <div className="alert alert-light border" role="alert">
-                    <div className="d-inline"> 
-                        Dataset info: Last date in dataset {this.props.datasetLastDate.data}
-                        <small className={statusClass + " border rounded p-1 ml-3 mr-3"}>{datasetStatus}</small>
-                    </div>
-                    {update}      
-                </div>
-                <div className="row">
+               <div className="row">
                     <div className="col col-sm-12 col-md-8">
                         <div className="card">
                             <div className="card-body">
                                 <div className="container ml-5">
                                     <label className="ml-5">Dataset Type</label>
-                                    <div className="row pt-1">
+                                    <div className="row pt-2">
                                         <div className="form-check col">
                                             <input className="form-check-input" 
                                                 type="radio" 
@@ -144,7 +98,6 @@ class ReportAttributes extends Component {
                                                 type="radio" 
                                                 name="dataset" 
                                                 value='classified'
-                                                
                                                 onChange={(event) => {this.changeDatasetHandler('dataset', event.target.value)}}/>
                                             <label className="form-check-label" htmlFor="classified">
                                                 Classified
@@ -153,8 +106,8 @@ class ReportAttributes extends Component {
                                     </div>
 
 
-                                    <label className="ml-5 pt-3">Attributes</label>
-                                    <div className="row">
+                                    <label className="ml-5 pt-4">Attributes</label>
+                                    <div className="row pt-2">
                                         <div className="form-group form-check col">
                                             <input 
                                                 id="area" 
@@ -182,7 +135,7 @@ class ReportAttributes extends Component {
                                                 onChange={() => {this.changeValueHandler('sNumber')}}
                                                 className="form-check-input"
                                                 defaultChecked
-                                                disabled={() => {this.checkDisabled()}}/>
+                                                disabled={this.state.datasetParam.sNDisabled}/>
                                             <label className="form-check-label" htmlFor="sNumber">Sunspot Number</label>
                                         </div>
                                         <div className="form-group form-check col">
@@ -224,9 +177,8 @@ class ReportAttributes extends Component {
                                     </div>
                                     <div className="row">
                                         <div className="col col-sm-12">
-                                            <Calendar 
-                                                date={moment("1997-01-01 00:00:00")} 
-                                                minDate={moment("1997-01-01 00:00:00")}
+                                            <input type="date" 
+                                                className="form-control"
                                                 onChange={(event) => {this.changeDateHandler('start', event.target.value)}}/>
                                         </div>
                                     </div>
@@ -237,11 +189,9 @@ class ReportAttributes extends Component {
                                     </div>
                                     <div className="row">
                                         <div className="col col-sm-12">
-                                            <Calendar 
-                                                date={moment()} 
-                                                minDate={moment("1997-01-01 00:00:00")}
-                                                onChange={(event) => {this.changeDateHandler('start', event.target.value)}}/>
-                                            
+                                            <input type="date" 
+                                                className="form-control"
+                                                onChange={(event) => {this.changeDateHandler('end', event.target.value)}}/>
                                         </div>
                                     </div>
                                     <div className="row pt-2">
@@ -274,4 +224,4 @@ class ReportAttributes extends Component {
     }
 }
 
-export default ReportAttributes;
+export default DatasetAttributes;

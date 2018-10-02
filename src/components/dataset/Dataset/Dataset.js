@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
 import Collapse from '../../../hoc/Collapse/Collapse';
-import ReportAttributes from '../ReportAttributes/ReportAttributes';
-import ARTable from '../ARTable/ARTable';
+import DatasetInfo from '../../info/DatasetInfo/DatasetInfo';
+import DatasetAttributes from '../DatasetAttributes/DatasetAttributes';
+import DatasetTable from '../DatasetTable/DatasetTable';
 import BlockUI from '../../../hoc/BlockUI/BlockUI';
 import axios from 'axios';
 
-class Report extends Component {
+class Dataset extends Component {
 
     constructor (props) {
         super(props)
@@ -73,13 +74,14 @@ class Report extends Component {
             <div>
                 <BlockUI fade={this.state.loading}/>
                 <Collapse>
-                    <ReportAttributes updateDataset={this.updateDatasetFile} datasetLastDate={this.state.lastdate} getDataset={this.renderDataset} />
+                    <DatasetInfo updateDataset={this.updateDatasetFile} datasetLastDate={this.state.lastdate} />
+                    <DatasetAttributes getDataset={this.renderDataset} />
                 </Collapse>
-                <ARTable hasResults={this.state.resultTable} data={this.state.dataset} chosenAttributes={this.state.attr}/>
+                <DatasetTable hasResults={this.state.resultTable} data={this.state.dataset} chosenAttributes={this.state.attr}/>
             </div>
 
         )
     }
 }
 
-export default Report;
+export default Dataset;

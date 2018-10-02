@@ -3,7 +3,7 @@ import React from 'react'
 const loading = () => {
     return (
         
-        <div className="mt-0">
+        <div className="d-inline float-right mt-0">
             <div className="row">
                 <div className="col col-sm-12 col-md-4 col-lg-2">
                     <div className="sk-circle">
@@ -21,9 +21,7 @@ const loading = () => {
                         <div className="sk-circle12 sk-child"></div>
                     </div>
                 </div>
-                <div className="col col-sm-12 col-md-8 col-lg-10 ml-0 pl-0">
-                    <small className="ml-0">Updating files...</small>
-                </div>                    
+                <small className="ml-0">Updating files...</small>                   
             </div>
         </div>
     )

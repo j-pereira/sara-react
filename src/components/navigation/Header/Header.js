@@ -13,7 +13,10 @@ const header = (props) => {
             </button>
             <div className="collapse navbar-collapse ml-3" id="navbarNavAltMarkup">
                 <div className="navbar-nav pl-2 pr-2">
-                    <Link className="nav-item nav-link" to="/reports">Reports</Link>
+                    <Link className="nav-item nav-link" to="/dataset">Dataset</Link>
+                </div>
+                <div className="navbar-nav pl-2 pr-2">
+                    <Link className="nav-item nav-link" to="/associationrules">Association Rules</Link>
                 </div>
                 <div className="navbar-nav pl-2 pr-2">
                     <Link className="nav-item nav-link" to="/about">About</Link>
