@@ -51,7 +51,7 @@ class ARules extends Component {
 
     renderRules = (attributes) => {
         console.log(attributes);
-        axios.get('/associationrules')
+        axios.post('associationrules', attributes)
             .then( response => {
                 this.setState({ 
                     resultTable: true, 
@@ -73,7 +73,7 @@ class ARules extends Component {
                 <BlockUI fade={this.state.loading}/>
                 <Collapse>
                     <DatasetInfo updateDataset={this.updateDatasetFile} datasetLastDate={this.state.lastdate} />
-                    <ARAttributes getRules={this.renderRules} />
+                    <ARAttributes getRules={this.renderRules} datasetLastDate={this.state.lastdate} />
                 </Collapse>
                 <ARTable hasResults={this.state.resultTable} data={this.state.rules} chosenAttributes={this.state.attr}/>
             </div>

@@ -15,41 +15,33 @@ class DatasetInfo extends Component {
         let datasetStatus;
         let statusClass;
         let update;
-        let loading;
-
-        if (this.state.loading) {
-            loading = <Loading/>;
-        } else {
-            loading = ''
-        }
-
+        
         if (this.props.datasetLastDate.updated) {
-            datasetStatus = 'Updated';
+            datasetStatus = 'Atualizada';
             statusClass = 'text-success border-success';
             update = '';
         } else {
-            datasetStatus = 'Outdated';
+            datasetStatus = 'Desatualizada';
             statusClass = 'text-warning border-warning';
-            update = 
-                <div className="d-inline float-right">  
+            update = !this.state.loading ? 
+                <div className="float-right">  
                     <button 
                         type="submit" 
-                        className="btn btn-link btn-sm"
+                        className="btn btn-link btn-sm p-0"
                         onClick={(event) => {
                             this.setState({ loading: true })
                             this.props.updateDataset(event)
-                        }} >
-                        Update  
+                        }} > Atualizar  
                     </button>
-                    {loading}
                 </div>
+                : <div className="d-inline float-right"> <Loading/> </div>
         }
 
         return (
             <div className="container">
                 <div className="alert alert-light border" role="alert">
                     <div className="d-inline"> 
-                        Dataset info: Last date in dataset {this.props.datasetLastDate.data}
+                        Informações da base de dados: Ultimo dia na base de dados {this.props.datasetLastDate.data}
                         <small className={statusClass + " border rounded p-1 ml-3 mr-3"}>{datasetStatus}</small>
                     </div>
                     {update}      

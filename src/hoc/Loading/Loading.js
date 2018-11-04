@@ -5,7 +5,7 @@ const loading = () => {
         
         <div className="d-inline float-right mt-0">
             <div className="row">
-                <div className="col col-sm-12 col-md-4 col-lg-2">
+                <div className="col-sm-3 col-md-3 col-lg-3">
                     <div className="sk-circle">
                         <div className="sk-circle1 sk-child"></div>
                         <div className="sk-circle2 sk-child"></div>
@@ -21,7 +21,9 @@ const loading = () => {
                         <div className="sk-circle12 sk-child"></div>
                     </div>
                 </div>
-                <small className="ml-0">Updating files...</small>                   
+                <div className="col-sm-9 col-md-9 col-lg-9"> 
+                    <small className="ml-0">Atualizando arquivos...</small>
+                </div>
             </div>
         </div>
     )

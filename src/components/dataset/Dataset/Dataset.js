@@ -75,7 +75,7 @@ class Dataset extends Component {
                 <BlockUI fade={this.state.loading}/>
                 <Collapse>
                     <DatasetInfo updateDataset={this.updateDatasetFile} datasetLastDate={this.state.lastdate} />
-                    <DatasetAttributes getDataset={this.renderDataset} />
+                    <DatasetAttributes getDataset={this.renderDataset} datasetLastDate={this.state.lastdate} />
                 </Collapse>
                 <DatasetTable hasResults={this.state.resultTable} data={this.state.dataset} chosenAttributes={this.state.attr}/>
             </div>

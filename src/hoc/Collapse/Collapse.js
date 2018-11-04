@@ -5,15 +5,15 @@ class Collapse extends Component {
     constructor (props) {
         super(props)
         this.state = {
-            buttonText: 'Hide'
+            buttonText: 'Esconder'
         }
     }
 
     changeButtonText = () => {
-        if (this.state.buttonText === 'Hide') {
-            this.setState({ buttonText: 'Show' })
-        } else if (this.state.buttonText === 'Show') {
-            this.setState({ buttonText: 'Hide' })
+        if (this.state.buttonText === 'Esconder') {
+            this.setState({ buttonText: 'Mostrar' })
+        } else if (this.state.buttonText === 'Mostrar') {
+            this.setState({ buttonText: 'Esconder' })
         }
     } 
     

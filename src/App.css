@@ -22,6 +22,10 @@
   font-size: large;
 }
 
+.bg-dark-table {
+  background-color: #e9eef5e5;
+}
+
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }

@@ -23,7 +23,8 @@ class DatasetAttributes extends Component {
                 magClassification: true,
                 xray: true,
                 radio: true,
-                sNDisabled: false
+                sNDisabled: false,
+                periodDisabled: true,
             },
             loading: false
         }
@@ -58,6 +59,17 @@ class DatasetAttributes extends Component {
         console.log(this.state.datasetParam);
     }
 
+    changeHoleBaseHandler = (attributeName) => {
+        let param = this.state.datasetParam;
+        param[attributeName] = !param[attributeName];
+        if (param[attributeName]) {
+            param.periodDisabled = true;
+        } else {
+            param.periodDisabled = false;
+        }
+        this.setState({ datasetParam: param });
+        console.log(this.state.datasetParam);
+    }
 
     requestHandler = (event) => {
         event.preventDefault();
@@ -72,7 +84,7 @@ class DatasetAttributes extends Component {
     }
 
     render () {
-        
+
         return (
             <form className="container"> 
                <div className="row">
@@ -80,10 +92,11 @@ class DatasetAttributes extends Component {
                         <div className="card">
                             <div className="card-body">
                                 <div className="container ml-5">
-                                    <label className="ml-5">Dataset Type</label>
+                                    <label className="ml-5">Tipo de Base de dados</label>
                                     <div className="row pt-2">
                                         <div className="form-check col">
                                             <input className="form-check-input" 
+                                                id="original"
                                                 type="radio" 
                                                 name="dataset" 
                                                 value='original'
@@ -95,18 +108,19 @@ class DatasetAttributes extends Component {
                                         </div>
                                         <div className="form-check col">
                                             <input className="form-check-input" 
+                                                id="classified"
                                                 type="radio" 
                                                 name="dataset" 
                                                 value='classified'
                                                 onChange={(event) => {this.changeDatasetHandler('dataset', event.target.value)}}/>
                                             <label className="form-check-label" htmlFor="classified">
-                                                Classified
+                                                Classificada
                                             </label>
                                         </div>
                                     </div>
 
 
-                                    <label className="ml-5 pt-4">Attributes</label>
+                                    <label className="ml-5 pt-4">Atributos</label>
                                     <div className="row pt-2">
                                         <div className="form-group form-check col">
                                             <input 
@@ -115,7 +129,7 @@ class DatasetAttributes extends Component {
                                                 onChange={() => {this.changeValueHandler('area')}}
                                                 className="form-check-input"
                                                 defaultChecked/>
-                                            <label className="form-check-label" htmlFor="area">Area</label>
+                                            <label className="form-check-label" htmlFor="area">Área</label>
                                         </div>
                                         <div className="form-group form-check col">
                                             <input 
@@ -124,7 +138,7 @@ class DatasetAttributes extends Component {
                                                 onChange={() => {this.changeValueHandler('xray')}}
                                                 className="form-check-input"
                                                 defaultChecked/>
-                                            <label className="form-check-label" htmlFor="xray">X-ray Flares</label>
+                                            <label className="form-check-label" htmlFor="xray">Explosões por Raio-X</label>
                                         </div>
                                     </div>
                                     <div className="row">
@@ -136,7 +150,7 @@ class DatasetAttributes extends Component {
                                                 className="form-check-input"
                                                 defaultChecked
                                                 disabled={this.state.datasetParam.sNDisabled}/>
-                                            <label className="form-check-label" htmlFor="sNumber">Sunspot Number</label>
+                                            <label className="form-check-label" htmlFor="sNumber">Número de manchas solares</label>
                                         </div>
                                         <div className="form-group form-check col">
                                             <input 
@@ -145,7 +159,7 @@ class DatasetAttributes extends Component {
                                                 onChange={() => {this.changeValueHandler('radio')}}
                                                 className="form-check-input"
                                                 defaultChecked/>
-                                            <label className="form-check-label" htmlFor="radio">Radio flux</label>
+                                            <label className="form-check-label" htmlFor="radio">Fluxo de rádio</label>
                                         </div>  
                                     </div>
                                     <div className="row">
@@ -156,7 +170,7 @@ class DatasetAttributes extends Component {
                                                 onChange={() => {this.changeValueHandler('magClassification')}}
                                                 className="form-check-input"
                                                 defaultChecked/>
-                                            <label className="form-check-label" htmlFor="magClassification">Sunspot Magnetic Classifiction</label>
+                                            <label className="form-check-label" htmlFor="magClassification">Classificação magnética da mancha</label>
                                         </div>
                                     </div>
                                 </div>
@@ -168,30 +182,41 @@ class DatasetAttributes extends Component {
                         <div className="card">
                             <div className="card-body">
                                 <div className="col">
-                                    <label className="pl-3">Period</label>
+                                    <label className="pl-3">Período</label>
                                     
                                     <div className="row pt-2">
                                         <div className="col col-sm-12">
-                                            <label htmlFor="start">Start</label>
+                                            <label htmlFor="start">Começo</label>
                                         </div>
                                     </div>
                                     <div className="row">
                                         <div className="col col-sm-12">
                                             <input type="date" 
+                                                id="start" 
+                                                name="start"
+                                                value={this.state.datasetParam.startYear +"-"+ this.state.datasetParam.startMonth +"-"+ this.state.datasetParam.startDay}
                                                 className="form-control"
-                                                onChange={(event) => {this.changeDateHandler('start', event.target.value)}}/>
+                                                min="1997-01-01" max={this.props.datasetLastDate.data}
+                                                className="form-control"
+                                                onChange={(event) => {this.changeDateHandler('start', event.target.value)}}
+                                                disabled={this.state.datasetParam.periodDisabled}/>
                                         </div>
                                     </div>
                                     <div className="row pt-2">
                                         <div className="col col-sm-12">
-                                            <label htmlFor="end">End</label>
+                                            <label htmlFor="end">Fim</label>
                                         </div>
                                     </div>
                                     <div className="row">
                                         <div className="col col-sm-12">
-                                            <input type="date" 
+                                            <input type="date"
+                                                id="end" 
+                                                name="end"
+                                                value={this.state.datasetParam.endYear +"-"+ this.state.datasetParam.endMonth +"-"+ this.state.datasetParam.endDay}
                                                 className="form-control"
-                                                onChange={(event) => {this.changeDateHandler('end', event.target.value)}}/>
+                                                min="1997-01-01" max={this.props.datasetLastDate.data}
+                                                onChange={(event) => {this.changeDateHandler('end', event.target.value)}}
+                                                disabled={this.state.datasetParam.periodDisabled}/>
                                         </div>
                                     </div>
                                     <div className="row pt-2">
@@ -200,9 +225,9 @@ class DatasetAttributes extends Component {
                                                 <input id="dataset" 
                                                     type="checkbox" 
                                                     className="form-check-input"
-                                                    onChange={() => {this.changeValueHandler('holeBase')}}
+                                                    onChange={() => {this.changeHoleBaseHandler('holeBase')}}
                                                     defaultChecked/>
-                                                <label className="form-check-label" htmlFor="dataset">Use hole dataset</label>
+                                                <label className="form-check-label" htmlFor="dataset">Use toda a base de dados</label>
                                             </div>
                                         </div>
                                     </div>
@@ -215,7 +240,7 @@ class DatasetAttributes extends Component {
                         <button type="submit" 
                             className="btn btn-primary float-right"
                             onClick={(event) => {this.requestHandler(event)}}>
-                            Search
+                            Pesquisar
                         </button>
                     </div> 
                 </div>         
